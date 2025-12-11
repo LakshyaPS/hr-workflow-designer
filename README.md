@@ -1,58 +1,64 @@
 # HR Workflow Designer (Prototype)
 
-This repo is a fully functional prototype implementing the HR Workflow Designer assignment described in the project specification PDF.  
-It includes a complete workflow canvas, node configuration panels, mock backend APIs, and a sandbox for simulation.
+This repository contains a fully functional prototype of the **HR Workflow Designer**, a visual workflow-building application implemented using **React, TypeScript, React Flow**, and **Mock Service Worker (MSW)**.  
+The project fulfills all required features from the assignment specification PDF, including workflow editing, node configuration, mock APIs, and simulation.
 
 ---
 
-##Features
+## 🏗️ Architecture
 
-- **React + TypeScript + Vite**
-- **React Flow canvas** with custom node components
-- **Drag & Drop builder**  
-  - Drag nodes from sidebar → drop on canvas
-- **Node configuration forms** (each implemented separately):
-  - Start Node
-  - Task Node
-  - Approval Node
-  - Automated Node
-  - End Node
-- **Mock API using MSW:**
-  - `GET /automations` — returns available automated actions & parameter definitions
-  - `POST /simulate` — accepts serialized workflow (nodes + edges) and returns a mock execution log
-- **Sandbox panel** to run workflow simulation and display execution steps
-- **Basic validation**
-  - Start node must exist
-  - Start node cannot have incoming edges
-- **Export workflow as JSON**
-
----
-
-##Project Structure
+The application is structured into clear, modular layers to separate workflow visualization, business logic, and mock backend services.
 
 src/
 ├─ components/
 │ ├─ Canvas/ # Workflow canvas + custom React Flow node components
-│ ├─ NodeForm/ # Separate editable forms for each node type
-│ ├─ SandboxPanel.tsx # Workflow simulation tester
-│ ├─ Sidebar.tsx # Sidebar listing draggable nodes
-│ └─ Ui/ # Toolbar and small UI utilities
+│ ├─ NodeForm/ # Config forms for Start, Task, Approval, Automated, End nodes
+│ ├─ SandboxPanel.tsx # Simulation tester + execution log viewer
+│ ├─ Sidebar.tsx # Node library for drag & drop
+│ └─ Ui/ # Toolbar and smaller UI elements
 │
 ├─ api/
-│ ├─ mock/ # MSW mock backend handlers (simulate + automations)
-│ └─ index.ts # API helper functions
+│ ├─ mock/ # MSW handlers (GET /automations, POST /simulate)
+│ └─ index.ts # Wrapper functions for API calls
 │
 ├─ hooks/
-│ └─ useWorkflow.ts # Node and edge state management logic
-│
-├─ utils/
-│ └─ graphValidation.ts # Structural workflow validation
+│ └─ useWorkflow.ts # Centralized workflow state (nodes, edges, updates)
 │
 ├─ types/
-│ └─ workflow.ts # Type definitions for all node data
+│ └─ workflow.ts # Node data structure and workflow type definitions
 │
-├─ App.tsx # Main layout combining all modules
-└─ main.tsx # Application entry point
+├─ utils/
+│ └─ graphValidation.ts # Basic structural validation logic
+│
+├─ App.tsx # Main application layout
+└─ main.tsx # Vite entry point
 
 
+### **Key Architecture Principles**
+- **Separation of concerns**  
+  Canvas logic, form logic, API logic, and validation logic are isolated into their own folders.
+- **Modular component design**  
+  Each node type (Start, Task, Approval, Automated, End) has its own form component for easy extension.
+- **Unidirectional data flow**  
+  Node updates flow from forms → App state → Canvas.
+- **Mock API layer**  
+  MSW simulates backend endpoints, allowing realistic async calls without needing a server.
+- **React Flow for Graph Operations**  
+  Handles drag/drop, connecting edges, positioning, and rendering custom nodes.
 
+---
+
+##How to Run:
+
+### 1. Install dependencies
+```bash
+npm install
+
+### 2. Start the development server
+npm run dev
+
+3. Open the app in your browser
+http://localhost:5173
+
+4. Build for production (optional)
+npm run build
