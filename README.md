@@ -1,4 +1,4 @@
-# HR Workflow Designer (Prototype)
+# HR Workflow Designer
 
 This repository contains a fully functional prototype of the **HR Workflow Designer**, a visual workflow-building application implemented using **React, TypeScript, React Flow**, and **Mock Service Worker (MSW)**.  
 The project fulfills all required features from the assignment specification PDF, including workflow editing, node configuration, mock APIs, and simulation.
@@ -62,4 +62,5 @@ http://localhost:5173
 
 4. Build for production (optional)
 npm run build
+
 
