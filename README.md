@@ -5,7 +5,7 @@ The project fulfills all required features from the assignment specification PDF
 
 ---
 
-## 🏗️ Architecture
+# Architecture
 
 The application is structured into clear, modular layers to separate workflow visualization, business logic, and mock backend services.
 
@@ -34,7 +34,7 @@ src/
 └─ main.tsx # Vite entry point
 
 
-### **Key Architecture Principles**
+ **Key Architecture Principles**
 - **Separation of concerns**  
   Canvas logic, form logic, API logic, and validation logic are isolated into their own folders.
 - **Modular component design**  
@@ -48,13 +48,13 @@ src/
 
 ---
 
-##How to Run:
+#How to Run:
 
-### 1. Install dependencies
+1. Install dependencies
 ```bash
 npm install
 
-### 2. Start the development server
+2. Start the development server
 npm run dev
 
 3. Open the app in your browser
@@ -62,3 +62,4 @@ http://localhost:5173
 
 4. Build for production (optional)
 npm run build
+
