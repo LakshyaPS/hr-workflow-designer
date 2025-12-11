@@ -1,0 +1,20 @@
+Tricky Frontend Bug I Solved
+
+One of the trickiest issues I encountered was that node updates in the properties panel were not reflecting on the canvas immediately, even though the React state was updating. React Flow internally memoizes nodes, so direct mutations don’t trigger re-renders. Initially, updating the selected node’s data seemed correct, but the UI lagged or reverted when dragging the node.
+
+What caused the bug:
+I was mutating the node’s data object indirectly, and React Flow requires a new node reference for proper reconciliation. React Flow diffing failed because the node object identity didn’t change.
+
+How I fixed it:
+I ensured that every node update returned a new immutable object, forcing React Flow to re-render correctly:
+
+setNodes((nodes) =>
+  nodes.map((n) =>
+    n.id === id ? { ...n, data: { ...n.data, ...updatedData } } : n
+  )
+);
+
+By enforcing immutability and avoiding in-place mutations, the canvas instantly reflected changes, the forms stayed in sync, and React Flow’s internal state remained stable.
+
+Why it was tricky:
+The bug appeared random — sometimes the node updated, sometimes it didn’t — because React Flow optimizes aggressively. Understanding how React Flow tracks node identity helped resolve the issue cleanly
